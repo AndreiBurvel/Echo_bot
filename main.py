@@ -23,12 +23,16 @@ async def process_command_help(message:Message):
 #Реализуем хэндлер на любые изображения
 @dp.message(F.photo)
 async def process_echo_image(message:Message):
-    await message.reply_photo(message.photo[0].file_id)
+    await message.answer_photo(message.photo[0].file_id)
+#Реализуем хэндлер на любые стикеры
+@dp.message(F.sticker)
+async def process_echo_sticker(message:Message):
+    await message.answer_sticker(message.sticker)
 
 #Реализуем хэндлер на любые текстовые сообщения
 @dp.message()
 async def process_echo(message:Message):
-    await message.reply(text=message.text)
+    await message.answer(text=message.text)
 
 
 if __name__=='__main__':
