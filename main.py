@@ -20,15 +20,13 @@ async def process_command_start(message:Message):
 async def process_command_help(message:Message):
     await message.answer('Я повторяю всё что ты пишешь.')
 
-#Реализуем хэндлер на любые изображения
-@dp.message(F.photo)
-async def process_echo_image(message:Message):
-    await message.reply_photo(message.photo[0].file_id)
-
-#Реализуем хэндлер на любые текстовые сообщения
+#Реализуем хэндлер на любые сообщения
 @dp.message()
 async def process_echo(message:Message):
-    await message.reply(text=message.text)
+    try:
+        await message.send_copy(chat_id=message.chat.id)
+    except:
+        await message.answer('Данный хэндлер не может быть обработан.')
 
 
 if __name__=='__main__':
