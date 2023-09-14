@@ -2,9 +2,12 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.filters import Command
 from aiogram.types import Message
 
-#Читаем токен из файла token.txt и записываем в переменную.
-with open('token.txt', 'r') as f:
-    BOT_TOKEN=f.read()
+import os
+from dotenv import load_dotenv, find_dotenv
+
+#Читаем токен из файла .env и записываем в переменную.
+load_dotenv(find_dotenv())
+BOT_TOKEN:str = os.getenv('TOKEN')
 
 #Инициализируем бота и диспетчера.
 bot=Bot(BOT_TOKEN)
